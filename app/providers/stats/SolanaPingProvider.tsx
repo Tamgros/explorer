@@ -24,6 +24,7 @@ export type PingMetric = {
     confirmed: number;
     loss: string;
     mean_ms: number;
+    mean_without_drops: number;
     ts: string;
     error: string;
 };
@@ -112,10 +113,18 @@ export function SolanaPingProvider({ children }: Props) {
                 }
                 const points = json
                     .map<PingInfo>(({ submitted, confirmed, mean_ms, ts }: PingMetric) => {
+                        let remove_dropped_ms = (mean_ms - (75*(submitted - confirmed)/submitted));
+
+                        let renormalized_mean = null;
+                        if (confirmed != 0){
+                            renormalized_mean = remove_dropped_ms * submitted/confirmed;
+                        }
+                        
                         return {
                             confirmed,
                             loss: (submitted - confirmed) / submitted,
                             mean: mean_ms,
+                            mean_without_drops: renormalized_mean,
                             submitted,
                             timestamp: new Date(ts),
                         };
