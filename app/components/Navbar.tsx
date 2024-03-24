@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useSelectedLayoutSegment, useSelectedLayoutSegments } from 'next/navigation';
 import React from 'react';
+import { FETCH_PING_INTERNL } from 'providers/stats/SolanaPingProvider';
 
 import { ClusterStatusButton } from './ClusterStatusButton';
 
@@ -27,7 +28,7 @@ export function Navbar() {
                 <button className="navbar-toggler" type="button" onClick={() => setCollapse(value => !value)}>
                     <span className="navbar-toggler-icon"></span>
                 </button>
-
+                FETCH_PING_INTERNL
                 <div className={`collapse navbar-collapse ms-auto me-4 ${collapse ? 'show' : ''}`}>
                     <ul className="navbar-nav me-auto">
                         <li className="nav-item">

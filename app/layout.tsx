@@ -10,6 +10,8 @@ import { ScrollAnchorProvider } from '@providers/scroll-anchor';
 import type { Viewport } from 'next';
 import { Rubik } from 'next/font/google';
 import { Metadata } from 'next/types';
+import { BucketPractice } from './components/BucketPractice';
+
 
 export const metadata: Metadata = {
     description: 'Inspect transactions, accounts, blocks, and more on the Solana blockchain',
@@ -23,7 +25,7 @@ export const viewport: Viewport = {
     width: 'device-width',
 };
 
-const rubikFont = Rubik({
+export const rubikFont = Rubik({
     display: 'swap',
     subsets: ['latin'],
     variable: '--explorer-default-font',
@@ -45,6 +47,7 @@ export default function RootLayout({
                         <ClusterModal />
                         <div className="main-content pb-4">
                             <Navbar />
+                            <BucketPractice />
                             <MessageBanner />
                             <ClusterStatusBanner />
                             <SearchBar />
