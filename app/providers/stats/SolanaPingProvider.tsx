@@ -113,7 +113,11 @@ export function SolanaPingProvider({ children }: Props) {
                 }
                 const points = json
                     .map<PingInfo>(({ submitted, confirmed, mean_ms, ts }: PingMetric) => {
-                        let remove_dropped_ms = (mean_ms - (75*(submitted - confirmed)/submitted));
+
+                        let remove_dropped_ms = 0;
+                        if (submitted != 0) {
+                            remove_dropped_ms = (mean_ms - (75*(submitted - confirmed)/submitted));
+                        }
 
                         let renormalized_mean = null;
                         if (confirmed != 0){
